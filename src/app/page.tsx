@@ -1,101 +1,351 @@
-import Image from "next/image";
+"use client"
+
+
+import React, { useState, useRef, useEffect } from "react";
+import { motion } from "framer-motion";
+import Loading from "./components/loading";
+import { MdArrowOutward } from "react-icons/md";
+import { FaGithub, FaLinkedin, FaEnvelope } from "react-icons/fa";
+import { FaBars } from "react-icons/fa6";
+import Menu from "./components/menu";
+import { AnimatePresence } from "framer-motion";
+import Projects from "./pages/projects";
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [isProjectVisible, setIsProjectVisible] = useState(false); // New state for project visibility
+  const containerRef = useRef(null);
+  const cursorRef = useRef(null);
+  const requestRef = useRef(null);
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
+  const toggleMenu = () => {
+    setIsMenuOpen((prev) => !prev);
+  };
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.3,
+      },
+    },
+  };
+
+  const textVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.8,
+        ease: "easeOut",
+      },
+    },
+  };
+
+  const iconVariants = {
+    hidden: { opacity: 0, scale: 0 },
+    visible: {
+      opacity: 1,
+      scale: 1,
+      transition: {
+        duration: 0.5,
+        ease: "easeOut",
+      },
+    },
+  };
+
+  const menuVariants = {
+    closed: {
+      scale: 1,
+      opacity: 1,
+      x: 0,
+      y: 0,
+    },
+    open: {
+      scale: 50,
+      opacity: 1,
+      x: "-50vw",
+      y: "-50vh",
+      transition: {
+        type: "spring",
+        stiffness: 80,
+        damping: 20,
+        duration: 0.8,
+      },
+    },
+  };
+
+  const contentVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        delay: 0.3,
+        duration: 0.5,
+      },
+    },
+  };
+
+  useEffect(() => {
+    let x = 0;
+    let y = 0;
+    let lastX = 0;
+    let lastY = 0;
+
+    const handleMouseMove = (e) => {
+      x = e.clientX;
+      y = e.clientY;
+    };
+
+    const updateCursor = () => {
+      const cursor = cursorRef.current;
+
+      if (cursor) {
+        const distX = x - lastX;
+        const distY = y - lastY;
+
+        lastX += distX / 6; // Control smoothing factor
+        lastY += distY / 6; // Control smoothing factor
+
+        cursor.style.transform = `translate3d(${lastX - 15}px, ${lastY - 15}px, 0)`; // Center the cursor
+      }
+
+      requestRef.current = requestAnimationFrame(updateCursor);
+    };
+
+    document.addEventListener("mousemove", handleMouseMove);
+
+    // Start the animation loop
+    requestRef.current = requestAnimationFrame(updateCursor);
+
+    return () => {
+      document.removeEventListener("mousemove", handleMouseMove);
+      cancelAnimationFrame(requestRef.current);
+    };
+  }, []);
+
+  const handleMouseEnter = () => {
+    const cursor = cursorRef.current;
+    if (cursor) {
+      cursor.style.mixBlendMode = "difference"; // Use 'difference' blend mode to make it contrast with text
+    }
+  };
+
+  const handleMouseLeave = () => {
+    const cursor = cursorRef.current;
+    if (cursor) {
+      cursor.style.mixBlendMode = "normal"; // Reset mix-blend mode
+    }
+  };
+
+
+  const handleWorkButtonClick = () => {
+    // Start the transition to hide the current content
+    setIsProjectVisible(true);
+  };
+
+  return (
+    <div
+      className="relative font-poppins text-[#BFBFC6]"
+      style={{
+        background: "linear-gradient(135deg, #0c0b0e, #2c3e50)",
+        minHeight: "100vh",
+      }}
+    >
+      {!isLoaded && <Loading onFinish={() => setIsLoaded(true)} />}
+      <motion.div
+        ref={containerRef}
+        className="absolute inset-0 flex items-center justify-center h-screen z-40"
+        initial={{ opacity: 0, y: 50 }}
+        animate={isProjectVisible ? { opacity: 0, y: -50 } : { opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, ease: "easeInOut" }}
+      >
+        <motion.main
+          className="text-center"
+          variants={containerVariants}
+          initial="hidden"
+          animate={isProjectVisible ? "hidden" : "visible"}
+        >
+          <motion.h1
+            className="text-[5rem] font-bold leading-[70px] z-[200]"
+            variants={textVariants}
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
+          >
+            Hello! I'm Sawant
+          </motion.h1>
+          <motion.p className="mt-4 text-7xl" variants={textVariants}>
+            Software Developer
+          </motion.p>
+          <motion.p className="mt-6 pt-8 px-8 text-xl text-gray-500" variants={textVariants}>
+            I build components that surf around the web
+          </motion.p>
+
+          {/* Button */}
+          <motion.button
+            className="mt-8 mx-auto px-5 py-3 border-[1px] border-[#BFBFC6] text-[#BFBFC6] text-md rounded-full shadow-md bg-transparent flex items-center justify-center space-x-2 font-light hover:bg-white hover:text-black"
+            variants={textVariants}
+            onClick={handleWorkButtonClick} // Trigger the transition
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
+          >
+            <span>My Work!</span>
+            <MdArrowOutward className="text-3xl" />
+          </motion.button>
+        </motion.main>
+      </motion.div>
+    {/* Social Media Icons */}
+    <motion.div
+        className="absolute inset-0"
+        variants={containerVariants}
+        initial="hidden"
+        animate={isLoaded ? "visible" : "hidden"}
+      >
+        {/* GitHub */}
+        <motion.div
+          className="flex items-center justify-center w-16 h-16 bg-black text-white rounded-full cursor-pointer  hover:bg-gray-800 z-[100]"
+          variants={iconVariants}
+          style={{
+            position: "absolute",
+            bottom: "300px",
+            right: "200px",
+            backgroundColor: "#333", // GitHub color
+          }}
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+        >
           <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
+            href="https://github.com"
             target="_blank"
             rel="noopener noreferrer"
+            className="flex items-center justify-center w-full h-full"
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
+            <FaGithub className="text-3xl" />
           </a>
+        </motion.div>
+
+        {/* LinkedIn */}
+        <motion.div
+          className="flex items-center justify-center w-16 h-16 bg-blue-700 text-white rounded-full cursor-pointer  hover:bg-blue-600 z-[200]"
+          variants={iconVariants}
+          style={{
+            position: "absolute",
+            top: "100px",
+            left: "300px",
+          }}
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+        >
           <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
+            href="https://linkedin.com"
             target="_blank"
             rel="noopener noreferrer"
+            className="flex items-center justify-center w-full h-full"
           >
-            Read our docs
+            <FaLinkedin className="text-3xl" />
           </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
+        </motion.div>
+
+        {/* Mail */}
+        <motion.div
+          className="flex items-center justify-center w-16 h-16 bg-rose-700 text-white rounded-full cursor-pointer  hover:bg-rose-600 z-[200]"
+          variants={iconVariants}
+          style={{
+            position: "absolute",
+            bottom: "100px",
+            right: "500px",
+          }}
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
         >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+          <a
+            href="mailto:your.email@example.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center justify-center w-full h-full"
+          >
+            <FaEnvelope className="text-3xl" />
+          </a>
+        </motion.div>
+      </motion.div>
+
+      {/* Custom Cursor */}
+      <div
+        ref={cursorRef}
+        className="absolute w-20 h-20 bg-[#BFBFC6] rounded-full pointer-events-none z-[400]"
+        style={{
+          transition: "none", // Disable transition to improve smoothness
+        }}
+      ></div>
+
+      {/* Initials (SK) */}
+      <motion.div
+        className="absolute bottom-10 left-10 text-3xl font-bold z-50 text-[#BFBFC6]"
+        variants={contentVariants}
+        initial="hidden"
+        animate={isLoaded ? "visible" : "hidden"}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+      >
+        SK
+      </motion.div>
+
+      {/* Menu icon at the bottom right */}
+      <motion.div
+        className="fixed bottom-10 right-10 w-14 h-14 bg-gray-800 text-white rounded-full flex items-center justify-center cursor-pointer z-[500]"
+        initial="closed"
+        animate={isMenuOpen ? "open" : "closed"}
+        variants={menuVariants}
+      ></motion.div>
+      <FaBars
+        onClick={toggleMenu}
+        className="text-3xl fixed bottom-[46px] right-[46px] z-[900] transition-all cursor-pointer"
+      />
+
+      {/* Expanded Menu */}
+      <AnimatePresence>
+        {isMenuOpen && (
+          <motion.div
+            className="fixed inset-0 bg-gray-800 text-white flex flex-col items-center justify-center z-[4000]"
+            initial="hidden"
+            animate="visible"
+            exit="hidden"
+            variants={contentVariants}
+          >
+            <ul className="text-4xl space-y-6 text-center">
+              <li className="hover:text-gray-400 cursor-pointer">Home</li>
+              <li className="hover:text-gray-400 cursor-pointer">Project</li>
+              <li className="hover:text-gray-400 cursor-pointer">Experience</li>
+              <li className="hover:text-gray-400 cursor-pointer">Contact</li>
+            </ul>
+            <button
+              className="mt-10 px-6 py-3 text-lg bg-gray-700 rounded-md hover:bg-gray-600"
+              onClick={toggleMenu}
+            >
+              Close Menu
+            </button>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Projects Component */}
+      <AnimatePresence>
+        {isProjectVisible && (
+          <motion.div
+            key="projects"
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 50 }}
+            transition={{ duration: 0.8, ease: "easeInOut" }}
+          >
+            <Projects />
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
