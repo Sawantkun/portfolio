@@ -1,6 +1,5 @@
 "use client"
 
-
 import React, { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
 import Loading from "./components/loading";
@@ -9,26 +8,26 @@ import { FaGithub, FaLinkedin, FaEnvelope } from "react-icons/fa";
 import { FaBars } from "react-icons/fa6";
 import Menu from "./components/menu";
 import { AnimatePresence } from "framer-motion";
-import Projects from "./pages/projects";
+
+
 
 export default function Home() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+    const toggleMenu = () => {
+      setIsMenuOpen((prev) => !prev);
+    };
   const [isLoaded, setIsLoaded] = useState(false);
-  const [isProjectVisible, setIsProjectVisible] = useState(false); // New state for project visibility
   const containerRef = useRef(null);
   const cursorRef = useRef(null);
   const requestRef = useRef(null);
-
-  const toggleMenu = () => {
-    setIsMenuOpen((prev) => !prev);
-  };
 
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.3,
+        staggerChildren: 0.3, // Adds delay between children animations
       },
     },
   };
@@ -53,6 +52,19 @@ export default function Home() {
       transition: {
         duration: 0.5,
         ease: "easeOut",
+      },
+    },
+  };
+
+  const initialsVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.8,
+        ease: "easeOut",
+        delay: 1, // Delay for initials
       },
     },
   };
@@ -90,6 +102,8 @@ export default function Home() {
     },
   };
 
+
+  // Mouse move event to track cursor position smoothly
   useEffect(() => {
     let x = 0;
     let y = 0;
@@ -142,17 +156,11 @@ export default function Home() {
     }
   };
 
-
-  const handleWorkButtonClick = () => {
-    // Start the transition to hide the current content
-    setIsProjectVisible(true);
-  };
-
   return (
     <div
-      className="relative font-poppins text-[#BFBFC6]"
+      className={`relative font-poppins text-[#BFBFC6]`}
       style={{
-        background: "linear-gradient(135deg, #0c0b0e, #2c3e50)",
+        background: "linear-gradient(135deg, #0c0b0e, #2c3e50)", // Subtle blue-black gradient
         minHeight: "100vh",
       }}
     >
@@ -161,14 +169,14 @@ export default function Home() {
         ref={containerRef}
         className="absolute inset-0 flex items-center justify-center h-screen z-40"
         initial={{ opacity: 0, y: 50 }}
-        animate={isProjectVisible ? { opacity: 0, y: -50 } : { opacity: 1, y: 0 }}
+        animate={isLoaded ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
         transition={{ duration: 0.8, ease: "easeInOut" }}
       >
         <motion.main
           className="text-center"
           variants={containerVariants}
           initial="hidden"
-          animate={isProjectVisible ? "hidden" : "visible"}
+          animate={isLoaded ? "visible" : "hidden"}
         >
           <motion.h1
             className="text-[5rem] font-bold leading-[70px] z-[200]"
@@ -178,18 +186,17 @@ export default function Home() {
           >
             Hello! I'm Sawant
           </motion.h1>
-          <motion.p className="mt-4 text-7xl" variants={textVariants}>
+          <motion.p className="mt-4 text-7xl" variants={textVariants} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
             Software Developer
           </motion.p>
-          <motion.p className="mt-6 pt-8 px-8 text-xl text-gray-500" variants={textVariants}>
-            I build components that surf around the web
+          <motion.p className="mt-6 pt-8 px-8 text-xl text-gray-500" variants={textVariants} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+            I build components that surfs around the web
           </motion.p>
 
           {/* Button */}
           <motion.button
-            className="mt-8 mx-auto px-5 py-3 border-[1px] border-[#BFBFC6] text-[#BFBFC6] text-md rounded-full shadow-md bg-transparent flex items-center justify-center space-x-2 font-light hover:bg-white hover:text-black"
+            className="mt-8 mx-auto px-5 py-3 border-[1px] border-[#BFBFC6] text-[#BFBFC6] text-md rounded-full shadow-md bg-transparent flex items-center justify-center space-x-2 font-light "
             variants={textVariants}
-            onClick={handleWorkButtonClick} // Trigger the transition
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
           >
@@ -198,8 +205,9 @@ export default function Home() {
           </motion.button>
         </motion.main>
       </motion.div>
-    {/* Social Media Icons */}
-    <motion.div
+
+      {/* Social Media Icons */}
+      <motion.div
         className="absolute inset-0"
         variants={containerVariants}
         initial="hidden"
@@ -276,36 +284,33 @@ export default function Home() {
       {/* Custom Cursor */}
       <div
         ref={cursorRef}
-        className="absolute w-20 h-20 bg-[#BFBFC6] rounded-full pointer-events-none z-[400]"
+        className="absolute w-20 h-20 bg-[#BFBFC6] rounded-full pointer-events-none z-[400] "
         style={{
           transition: "none", // Disable transition to improve smoothness
         }}
       ></div>
 
-      {/* Initials (SK) */}
-      <motion.div
-        className="absolute bottom-10 left-10 text-3xl font-bold z-50 text-[#BFBFC6]"
-        variants={contentVariants}
-        initial="hidden"
-        animate={isLoaded ? "visible" : "hidden"}
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
-      >
-        SK
-      </motion.div>
+{/* Initials (SK) */}
+<motion.div
+  className="absolute bottom-10 left-10 text-3xl font-bold  z-50 text-[#BFBFC6]"
+  variants={initialsVariants}
+  initial="hidden"
+  animate={isLoaded ? "visible" : "hidden"}
+  onMouseEnter={handleMouseEnter}
+  onMouseLeave={handleMouseLeave}
+>
+  SK
+</motion.div>
 
-      {/* Menu icon at the bottom right */}
-      <motion.div
+{/* Menu icon at the bottom right */}
+<motion.div
         className="fixed bottom-10 right-10 w-14 h-14 bg-gray-800 text-white rounded-full flex items-center justify-center cursor-pointer z-[500]"
         initial="closed"
         animate={isMenuOpen ? "open" : "closed"}
         variants={menuVariants}
-      ></motion.div>
-      <FaBars
-        onClick={toggleMenu}
-        className="text-3xl fixed bottom-[46px] right-[46px] z-[900] transition-all cursor-pointer"
-      />
-
+        >
+      </motion.div>
+       <FaBars onClick={toggleMenu}  className="text-3xl fixed bottom-[46px] right-[46px] z-[900] transition-all cursor-pointer" />
       {/* Expanded Menu */}
       <AnimatePresence>
         {isMenuOpen && (
@@ -331,21 +336,5 @@ export default function Home() {
           </motion.div>
         )}
       </AnimatePresence>
-
-      {/* Projects Component */}
-      <AnimatePresence>
-        {isProjectVisible && (
-          <motion.div
-            key="projects"
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 50 }}
-            transition={{ duration: 0.8, ease: "easeInOut" }}
-          >
-            <Projects />
-          </motion.div>
-        )}
-      </AnimatePresence>
     </div>
   );
-}
