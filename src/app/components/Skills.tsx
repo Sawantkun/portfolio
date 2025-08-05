@@ -8,7 +8,6 @@ import {
   FaNodeJs,
   FaPython,
   FaGitAlt,
-  FaDatabase,
   FaTools
 } from "react-icons/fa";
 import {

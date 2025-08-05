@@ -3,7 +3,8 @@
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
-import { FaGithub, FaExternalLinkAlt, FaCode, FaRocket } from "react-icons/fa";
+import Image from "next/image";
+import { FaGithub, FaExternalLinkAlt, FaRocket } from "react-icons/fa";
 import { BiTime } from "react-icons/bi";
 
 const Projects = () => {
@@ -19,7 +20,7 @@ const Projects = () => {
       technologies: ["Next.js", "React", "AI/ML", "Computer Vision", "Tailwind CSS"],
       github: "https://github.com/Sawantkun/haigge.git",
       live: "https://haigge.vercel.app/",
-      image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600&h=400&fit=crop",
+      image: "/haigge.jpg",
       featured: true
     },
     {
@@ -30,7 +31,7 @@ const Projects = () => {
       technologies: ["React", "Node.js", "MongoDB", "Express", "Bootstrap"],
       github: "https://github.com/Sawantkun/minor",
       live: "https://alumni-portal-sable.vercel.app/",
-      image: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=600&h=400&fit=crop",
+      image: "/Alumni.jpg",
       featured: true
     },
     {
@@ -41,7 +42,7 @@ const Projects = () => {
       technologies: ["Next.js", "React", "Tailwind CSS", "Framer Motion"],
       github: "https://github.com/Sawantkun/nusteraiwebsite",
       live: "https://nusteraiwebsite.vercel.app/",
-      image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=600&h=400&fit=crop",
+      image: "/nusterai.jpg",
       featured: true
     },
     {
@@ -52,7 +53,7 @@ const Projects = () => {
       technologies: ["React", "Node.js", "MongoDB", "Socket.io"],
       github: "#",
       live: "https://planitio.vercel.app",
-      image: "https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=600&h=400&fit=crop",
+      image: "/planit.jpg",
       featured: false,
       award: "2nd Place - iNeuron Hackathon"
     },
@@ -136,9 +137,11 @@ const Projects = () => {
               >
                 <div className="lg:w-1/2">
                   <div className="relative group overflow-hidden rounded-2xl shadow-lg">
-                    <img
+                    <Image
                       src={project.image}
                       alt={project.title}
+                      width={600}
+                      height={320}
                       className="w-full h-80 object-cover transition-transform duration-300 group-hover:scale-110"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
@@ -256,9 +259,11 @@ const Projects = () => {
                 className="bg-gray-800 rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 group border border-gray-700"
               >
                 <div className="relative overflow-hidden">
-                  <img
+                  <Image
                     src={project.image}
                     alt={project.title}
+                    width={400}
+                    height={192}
                     className="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-110"
                   />
                   <div className="absolute top-4 right-4">
