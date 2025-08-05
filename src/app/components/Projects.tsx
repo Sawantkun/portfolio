@@ -142,7 +142,7 @@ const Projects = () => {
                       alt={project.title}
                       width={600}
                       height={320}
-                      className="w-full h-80 object-cover transition-transform duration-300 group-hover:scale-110"
+                      className="w-full h-auto object-contain transition-transform duration-300 group-hover:scale-110"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                     <div className="absolute bottom-4 left-4 right-4 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300 opacity-0 group-hover:opacity-100">
@@ -264,7 +264,7 @@ const Projects = () => {
                     alt={project.title}
                     width={400}
                     height={192}
-                    className="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-110"
+                    className="w-full h-48 object-contain transition-transform duration-300 group-hover:scale-110"
                   />
                   <div className="absolute top-4 right-4">
                     <span className={`px-2 py-1 rounded-full text-xs font-medium ${
