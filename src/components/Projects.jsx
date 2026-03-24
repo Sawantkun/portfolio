@@ -14,10 +14,11 @@ const PROJECTS = {
   ],
   products: [
     {
-      title: "E-Commerce Experience",
-      category: "Web App / Design",
-      year: "2023",
-      image: "/ecommerce_preview_1774378704863.png"
+      title: "PawMatch",
+      category: "AI-Powered Pet Matching",
+      year: "2024",
+      image: "/pawmatch.jpeg",
+      link: "https://pawmatch-one.vercel.app/"
     },
     {
       title: "Fintech Dashboard",
@@ -38,7 +39,7 @@ export default function Projects() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-10%" });
 
-  const [activeTab,    setActiveTab]    = useState('products');
+  const [activeTab, setActiveTab] = useState('products');
   const [activeProject, setActiveProject] = useState(null);
 
   const x = useMotionValue(0);
@@ -137,7 +138,10 @@ function ProjectItem({ project, index, isInView, setActiveProject }) {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
-    <motion.div
+    <motion.a
+      href={project.link || "#"}
+      target={project.link ? "_blank" : undefined}
+      rel={project.link ? "noopener noreferrer" : undefined}
       className="project-item"
       onMouseEnter={() => { setIsHovered(true);  setActiveProject(project); }}
       onMouseLeave={() => { setIsHovered(false); setActiveProject(null); }}
@@ -167,6 +171,7 @@ function ProjectItem({ project, index, isInView, setActiveProject }) {
         animate={{ opacity: isHovered ? 1 : 0 }}
         transition={{ duration: 0.3 }}
       />
-    </motion.div>
+    </motion.a>
   );
 }
+
