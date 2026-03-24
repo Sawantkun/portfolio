@@ -157,7 +157,7 @@
 
 @media (max-width: 768px) {
   .hero-wrapper {
-    padding: 1.75rem 5vw calc(7rem + env(safe-area-inset-bottom));
+    padding: 1.75rem 5vw calc(6rem + env(safe-area-inset-bottom));
     justify-content: space-between;
     height: 100dvh;
     height: 100svh;
@@ -186,7 +186,7 @@
 
 @media (max-width: 480px) {
   .hero-wrapper {
-    padding: 1.25rem 5vw calc(6rem + env(safe-area-inset-bottom));
+    padding: 1.25rem 5vw calc(7rem + env(safe-area-inset-bottom));
   }
 
   .hero-top-bar {
