@@ -157,16 +157,22 @@
 
 @media (max-width: 768px) {
   .hero-wrapper {
-    /* bottom padding reserves space for the fixed dock bar (~5.5rem) */
     padding: 2rem 5vw calc(5.5rem + env(safe-area-inset-bottom));
-    justify-content: space-between;
+    justify-content: flex-start;
+    gap: 2rem;
     height: 100dvh;
+    height: 100svh; /* small viewport height — excludes browser chrome */
+  }
+
+  .hero-center {
+    flex: unset;
   }
 
   .hero-bottom-bar {
     flex-direction: column;
     align-items: flex-start;
     gap: 1.25rem;
+    margin-top: auto; /* push description+stats to fill remaining space naturally */
   }
 
   .hero-stats {
@@ -182,6 +188,7 @@
 @media (max-width: 480px) {
   .hero-wrapper {
     padding: 1.5rem 5vw calc(5.5rem + env(safe-area-inset-bottom));
+    gap: 1.5rem;
   }
 
   .hero-top-bar {
