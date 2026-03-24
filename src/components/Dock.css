@@ -1,0 +1,512 @@
+/* ── Dock ─────────────────────────────────────────────────────────────────── */
+.dock {
+  position: fixed;
+  left: 1.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.dock-icon {
+  position: relative;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: transparent;
+  border: 1px solid var(--card-border);
+  color: var(--text-secondary);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color 0.25s, color 0.25s;
+}
+
+.dock-icon:hover {
+  border-color: rgba(255, 255, 255, 0.22);
+  color: var(--text-primary);
+}
+
+.dock-icon.active {
+  border-color: rgba(255, 255, 255, 0.28);
+  color: var(--text-primary);
+}
+
+/* Icon + label wrapper */
+.dock-item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+/* Label — appears to the right on hover */
+.dock-label {
+  position: absolute;
+  left: calc(100% + 14px);
+  white-space: nowrap;
+  font-family: var(--font-main);
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  text-transform: lowercase;
+  color: var(--text-secondary);
+  pointer-events: none;
+  opacity: 0;
+  transform: translateX(-6px);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.dock-item:hover .dock-label {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Active dot */
+.dock-dot {
+  position: absolute;
+  bottom: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: var(--text-secondary);
+}
+
+/* ── Shared window shell ──────────────────────────────────────────────────── */
+.aw {
+  position: fixed;
+  z-index: 999;
+  background: rgba(10, 10, 10, 0.96);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 14px;
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.03) inset,
+    0 32px 80px rgba(0, 0, 0, 0.75),
+    0 8px 24px rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  font-family: 'JetBrains Mono', 'Fira Code', ui-monospace, monospace;
+  font-size: 12.5px;
+  line-height: 1.65;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  background-image: repeating-linear-gradient(
+    0deg, transparent, transparent 3px,
+    rgba(255, 255, 255, 0.007) 3px, rgba(255, 255, 255, 0.007) 4px
+  );
+}
+
+/* Chrome bar */
+.aw-chrome {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.55rem 0.9rem;
+  background: rgba(255, 255, 255, 0.025);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  cursor: grab;
+  user-select: none;
+  flex-shrink: 0;
+}
+.aw-chrome:active { cursor: grabbing; }
+
+.aw-dots { display: flex; gap: 6px; align-items: center; }
+
+.awd {
+  width: 12px; height: 12px;
+  border-radius: 50%; border: none; padding: 0; flex-shrink: 0;
+}
+.awd.r { background: #ff5f57; cursor: pointer; }
+.awd.y { background: #febc2e; }
+.awd.g { background: #28c840; }
+.awd.r:hover { filter: brightness(1.15); }
+
+.aw-title {
+  font-size: 0.7rem;
+  color: rgba(255, 255, 255, 0.35);
+  letter-spacing: 0.04em;
+  pointer-events: none;
+}
+.aw-subtitle {
+  font-size: 0.65rem;
+  color: rgba(255, 255, 255, 0.15);
+  pointer-events: none;
+}
+.aw-x {
+  margin-left: auto;
+  background: transparent;
+  border: none;
+  color: rgba(255, 255, 255, 0.18);
+  cursor: pointer;
+  padding: 2px 4px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  transition: color 0.15s;
+}
+.aw-x:hover { color: rgba(255, 255, 255, 0.6); }
+
+/* Body */
+.aw-body {
+  flex: 1;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+/* ── Terminal styles ──────────────────────────────────────────────────────── */
+.term-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1rem 1.3rem 0.75rem;
+  cursor: text;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255,255,255,0.07) transparent;
+}
+.term-body::-webkit-scrollbar       { width: 4px; }
+.term-body::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.08); border-radius: 2px; }
+
+.tl { white-space: pre; display: block; }
+.tl-heading { color: #ffffff;  font-weight: 700; font-size: 0.72rem; letter-spacing: 0.1em; }
+.tl-body    { color: #b0b0b0; }
+.tl-accent  { color: #ededed; }
+.tl-muted   { color: #505050; }
+.tl-dim     { color: #383838; }
+.tl-success { color: #10b981; }
+.tl-error   { color: #f87171; }
+
+.term-prompt-row {
+  display: flex; align-items: center; gap: 0.55rem; margin-top: 0.35rem;
+}
+.term-ps1      { color: #10b981; white-space: nowrap; flex-shrink: 0; font-size: 11.5px; }
+.term-cmd-echo { color: #ededed; }
+.term-input {
+  flex: 1; background: transparent; border: none; outline: none;
+  color: #ededed; font-family: inherit; font-size: inherit;
+  line-height: inherit; caret-color: #10b981; min-width: 0;
+}
+
+/* ── Flappy Bird ──────────────────────────────────────────────────────────── */
+.flappy-canvas {
+  display: block;
+  cursor: pointer;
+  width: 100%;
+  height: 100%;
+}
+
+/* ── Hack Sim ─────────────────────────────────────────────────────────────── */
+.hack-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1.2rem 1.4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255,255,255,0.07) transparent;
+}
+.hack-body::-webkit-scrollbar       { width: 4px; }
+.hack-body::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.08); border-radius: 2px; }
+
+.hack-line {
+  white-space: pre;
+  font-size: 12.5px;
+  line-height: 1.7;
+  color: #a0a0a0;
+}
+.hack-line.h-accent { color: #10b981; font-weight: 600; }
+.hack-line.h-dim    { color: #444444; }
+
+.hack-start-wrap {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  padding: 2rem;
+}
+
+.hack-tagline {
+  font-family: var(--font-main);
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.25);
+  text-align: center;
+  line-height: 1.6;
+}
+
+.hack-run-btn {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 0.85rem;
+  color: #10b981;
+  background: rgba(16, 185, 129, 0.08);
+  border: 1px solid rgba(16, 185, 129, 0.25);
+  border-radius: 8px;
+  padding: 0.55rem 1.4rem;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s, box-shadow 0.2s;
+  letter-spacing: 0.04em;
+}
+.hack-run-btn:hover {
+  background: rgba(16, 185, 129, 0.14);
+  border-color: rgba(16, 185, 129, 0.45);
+  box-shadow: 0 0 20px rgba(16, 185, 129, 0.12);
+}
+
+.hack-reset-btn {
+  align-self: flex-start;
+  margin-top: 1rem;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.2);
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 6px;
+  padding: 0.3rem 0.8rem;
+  cursor: pointer;
+  transition: color 0.2s, border-color 0.2s;
+}
+.hack-reset-btn:hover {
+  color: rgba(255, 255, 255, 0.5);
+  border-color: rgba(255, 255, 255, 0.18);
+}
+
+/* ── Resume App ───────────────────────────────────────────────────────────── */
+.resume-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1.4rem 1.6rem 1.8rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255,255,255,0.07) transparent;
+  font-family: var(--font-main);
+}
+.resume-body::-webkit-scrollbar       { width: 4px; }
+.resume-body::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.08); border-radius: 2px; }
+
+.resume-download-btn {
+  align-self: flex-end;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: var(--font-main);
+  font-size: 0.72rem;
+  color: #10b981;
+  background: rgba(16,185,129,0.08);
+  border: 1px solid rgba(16,185,129,0.25);
+  border-radius: 6px;
+  padding: 0.35rem 0.85rem;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.2s, border-color 0.2s;
+}
+.resume-download-btn:hover {
+  background: rgba(16,185,129,0.15);
+  border-color: rgba(16,185,129,0.45);
+}
+
+.resume-header {
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+  padding-bottom: 1rem;
+}
+
+.resume-name {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #ededed;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.4rem;
+}
+
+.resume-contact {
+  font-size: 0.7rem;
+  color: #505050;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+  align-items: center;
+}
+
+.resume-sep { color: #333; }
+
+.resume-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.resume-section-title {
+  font-family: var(--font-main);
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #444;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  padding-bottom: 0.3rem;
+}
+
+.resume-text {
+  font-size: 0.72rem;
+  color: #888;
+  line-height: 1.6;
+}
+
+.resume-skills { display: flex; flex-direction: column; gap: 0.3rem; }
+
+.resume-skill-row {
+  display: flex;
+  gap: 0.75rem;
+  font-size: 0.72rem;
+  line-height: 1.5;
+}
+
+.resume-skill-cat {
+  width: 90px;
+  flex-shrink: 0;
+  color: #555;
+  font-size: 0.68rem;
+  padding-top: 0.05rem;
+}
+
+.resume-exp-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  padding-bottom: 0.9rem;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+}
+.resume-exp-item:last-child { border-bottom: none; padding-bottom: 0; }
+
+.resume-exp-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+}
+
+.resume-exp-role {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #d0d0d0;
+}
+
+.resume-exp-duration {
+  font-size: 0.65rem;
+  color: #444;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.resume-exp-company {
+  font-size: 0.68rem;
+  color: #555;
+}
+
+.resume-exp-points {
+  margin: 0.3rem 0 0 0.9rem;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.resume-exp-points li {
+  font-size: 0.7rem;
+  color: #666;
+  line-height: 1.55;
+}
+
+/* ── Mobile bottom nav bar ────────────────────────────────────────────────── */
+@media (max-width: 600px) {
+  .dock {
+    /* Full-width bar pinned to bottom */
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: auto;
+    transform: none;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    gap: 0;
+
+    /* Glass background */
+    background: rgba(5, 5, 5, 0.92);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border-top: 1px solid var(--card-border);
+    padding: 0.65rem 1rem calc(1.5rem + env(safe-area-inset-bottom));
+    width: 100%;
+    z-index: 1000;
+    overflow: visible;
+  }
+
+  /* Each item fills equal width */
+  .dock-item {
+    flex: 1;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.3rem;
+  }
+
+  /* Label always visible below icon on mobile */
+  .dock-label {
+    position: static;
+    transform: none;
+    opacity: 1;
+    font-size: 0.65rem;
+    letter-spacing: 0.04em;
+    color: var(--text-secondary);
+  }
+
+  .dock-item:hover .dock-label {
+    transform: none;
+  }
+
+  .dock-icon {
+    width: 46px;
+    height: 46px;
+  }
+
+  .dock-dot {
+    bottom: -4px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  /* App windows fill screen above the nav bar */
+  .aw {
+    position: fixed !important;
+    left: 0.75rem !important;
+    right: 0.75rem !important;
+    top: 0.75rem !important;
+    bottom: calc(5.5rem + env(safe-area-inset-bottom)) !important;
+    width: auto !important;
+    height: auto !important;
+    border-radius: 18px;
+    font-size: 11.5px;
+  }
+
+  .tl {
+    white-space: pre-wrap;
+    word-break: break-word;
+  }
+
+  .hack-line {
+    white-space: pre-wrap;
+    word-break: break-word;
+  }
+}

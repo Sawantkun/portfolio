@@ -1,0 +1,225 @@
+/* ── Floating button ──────────────────────────────────────────────────────── */
+.t-fab {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0 1.1rem;
+  height: 44px;
+  border-radius: 100px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--text-secondary);
+  cursor: pointer;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  transition:
+    background 0.2s,
+    border-color 0.2s,
+    color 0.2s,
+    box-shadow 0.2s;
+  overflow: hidden;
+}
+
+.t-fab:hover {
+  background: rgba(255, 255, 255, 0.09);
+  border-color: rgba(255, 255, 255, 0.18);
+  color: var(--text-primary);
+  box-shadow: 0 0 24px rgba(255, 255, 255, 0.05);
+}
+
+.t-fab.is-open {
+  background: rgba(16, 185, 129, 0.08);
+  border-color: rgba(16, 185, 129, 0.3);
+  color: #10b981;
+  box-shadow: 0 0 20px rgba(16, 185, 129, 0.1);
+}
+
+.t-fab-label {
+  font-family: 'JetBrains Mono', 'Fira Code', ui-monospace, monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  text-transform: lowercase;
+}
+
+/* ── Window ───────────────────────────────────────────────────────────────── */
+.t-window {
+  position: fixed;
+  bottom: 5.5rem;
+  right: 2rem;
+  z-index: 999;
+  width: 640px;
+  max-width: calc(100vw - 2rem);
+  height: 430px;
+  max-height: calc(100vh - 9rem);
+  background: rgba(10, 10, 10, 0.96);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 14px;
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.03) inset,
+    0 32px 80px rgba(0, 0, 0, 0.8),
+    0 8px 24px rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  font-family: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', ui-monospace, monospace;
+  font-size: 12.5px;
+  line-height: 1.65;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+
+  /* Subtle scanline texture */
+  background-image: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 3px,
+    rgba(255, 255, 255, 0.008) 3px,
+    rgba(255, 255, 255, 0.008) 4px
+  );
+}
+
+/* ── Title bar ────────────────────────────────────────────────────────────── */
+.t-titlebar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.55rem 0.9rem;
+  background: rgba(255, 255, 255, 0.025);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  cursor: grab;
+  user-select: none;
+  flex-shrink: 0;
+}
+
+.t-titlebar:active { cursor: grabbing; }
+
+.t-dots {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.t-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: none;
+  padding: 0;
+  cursor: default;
+  flex-shrink: 0;
+}
+
+.t-dot.red    { background: #ff5f57; cursor: pointer; }
+.t-dot.yellow { background: #febc2e; }
+.t-dot.green  { background: #28c840; }
+
+.t-dot.red:hover { filter: brightness(1.15); }
+
+.t-title {
+  font-size: 0.7rem;
+  color: rgba(255, 255, 255, 0.28);
+  letter-spacing: 0.04em;
+  pointer-events: none;
+}
+
+.t-close-btn {
+  background: transparent;
+  border: none;
+  color: rgba(255, 255, 255, 0.2);
+  cursor: pointer;
+  padding: 2px 4px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  transition: color 0.15s;
+}
+
+.t-close-btn:hover { color: rgba(255, 255, 255, 0.6); }
+
+/* ── Body ─────────────────────────────────────────────────────────────────── */
+.t-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1rem 1.3rem 0.75rem;
+  cursor: text;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.07) transparent;
+}
+
+.t-body::-webkit-scrollbar       { width: 4px; }
+.t-body::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 2px;
+}
+
+/* ── Output lines ─────────────────────────────────────────────────────────── */
+.t-line {
+  white-space: pre;
+  display: block;
+}
+
+.t-heading { color: #ffffff;  font-weight: 700; font-size: 0.72rem; letter-spacing: 0.1em; }
+.t-body    { color: #b0b0b0; }
+.t-accent  { color: #ededed; }
+.t-muted   { color: #505050; }
+.t-dim     { color: #383838; }
+.t-success { color: #10b981; }
+.t-error   { color: #f87171; }
+
+/* ── Entry spacing ────────────────────────────────────────────────────────── */
+.t-entry { margin-top: 0.15rem; }
+
+/* ── Prompt row ───────────────────────────────────────────────────────────── */
+.t-prompt-row {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  margin-top: 0.35rem;
+}
+
+.t-ps1 {
+  color: #10b981;
+  white-space: nowrap;
+  flex-shrink: 0;
+  font-size: 11.5px;
+}
+
+.t-cmd-echo {
+  color: #ededed;
+}
+
+/* ── Input ────────────────────────────────────────────────────────────────── */
+.t-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #ededed;
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  caret-color: #10b981;
+  min-width: 0;
+}
+
+/* ── Mobile ───────────────────────────────────────────────────────────────── */
+@media (max-width: 680px) {
+  .t-fab {
+    bottom: 1.25rem;
+    right: 1.25rem;
+    padding: 0 0.9rem;
+    height: 40px;
+  }
+
+  .t-window {
+    bottom: 5rem;
+    right: 1.25rem;
+    left: 1.25rem;
+    width: auto;
+    height: 60vh;
+  }
+}
