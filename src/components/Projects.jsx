@@ -39,7 +39,6 @@ const PROJECTS = {
       year: "2024",
       image: "/moko.jpeg",
       link: "https://mokoscosmajix.com/",
-      techStack: ['shopify', 'liquid'],
     },
     {
       title: "Dileti",
@@ -47,7 +46,6 @@ const PROJECTS = {
       year: "2024",
       image: "/dileti.jpeg",
       link: "https://dileti.com/",
-      techStack: ['shopify', 'liquid'],
     },
     {
       title: "LabGems",
@@ -55,7 +53,6 @@ const PROJECTS = {
       year: "2024",
       image: "/labgems.jpeg",
       link: "https://labgems.com/",
-      techStack: ['shopify', 'liquid'],
     },
   ],
   products: [
