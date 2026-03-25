@@ -10,7 +10,27 @@ const TABS = [
 
 const PROJECTS = {
   shopify: [
-    // Add your Shopify projects here
+    {
+      title: "Moko's Cosmajix",
+      category: "Beauty & Skincare",
+      year: "2024",
+      image: "/moko.jpeg",
+      link: "https://mokoscosmajix.com/"
+    },
+    {
+      title: "Dileti",
+      category: "Fine Jewellery & Lab-Grown Diamonds",
+      year: "2024",
+      image: "/dileti.jpeg",
+      link: "https://dileti.com/"
+    },
+    {
+      title: "LabGems",
+      category: "Lab-Grown Diamonds & Gemstones",
+      year: "2024",
+      image: "/labgems.jpeg",
+      link: "https://labgems.com/"
+    },
   ],
   products: [
     {
@@ -20,18 +40,6 @@ const PROJECTS = {
       image: "/pawmatch.jpeg",
       link: "https://pawmatch-one.vercel.app/"
     },
-    {
-      title: "Fintech Dashboard",
-      category: "Product Design",
-      year: "2023",
-      image: "/fintech_preview_1774378726570.png"
-    },
-    {
-      title: "Interactive AI Agent",
-      category: "Development",
-      year: "2024",
-      image: "/ai_preview_1774378845765.png"
-    }
   ],
 };
 
@@ -97,15 +105,28 @@ export default function Projects() {
                 Coming soon — projects being added.
               </div>
             ) : (
-              list.map((project, idx) => (
-                <ProjectItem
-                  key={project.title}
-                  project={project}
-                  index={idx}
-                  isInView={isInView}
-                  setActiveProject={setActiveProject}
-                />
-              ))
+              <>
+                {list.map((project, idx) => (
+                  <ProjectItem
+                    key={project.title}
+                    project={project}
+                    index={idx}
+                    isInView={isInView}
+                    setActiveProject={setActiveProject}
+                  />
+                ))}
+                {activeTab === 'products' && (
+                  <motion.div
+                    className="projects-coming-soon"
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={isInView ? { opacity: 1, y: 0 } : {}}
+                    transition={{ duration: 0.6, delay: 0.1 * list.length }}
+                  >
+                    <span className="coming-soon-dot" />
+                    More projects in development — coming soon
+                  </motion.div>
+                )}
+              </>
             )}
           </motion.div>
         </AnimatePresence>

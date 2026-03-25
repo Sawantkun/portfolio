@@ -50,6 +50,35 @@
   z-index: 1;
 }
 
+/* ── Coming soon footer ── */
+.projects-coming-soon {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 1.5rem 0;
+  border-bottom: 1px solid var(--card-border);
+  color: var(--text-secondary);
+  font-family: var(--font-main);
+  font-size: 0.8rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.coming-soon-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--text-secondary);
+  opacity: 0.5;
+  flex-shrink: 0;
+  animation: coming-soon-blink 2.5s ease-in-out infinite;
+}
+
+@keyframes coming-soon-blink {
+  0%, 100% { opacity: 0.5; }
+  50%       { opacity: 0.15; }
+}
+
 /* ── Empty state ── */
 .projects-empty {
   padding: 4rem 0;

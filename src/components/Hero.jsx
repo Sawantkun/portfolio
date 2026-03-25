@@ -31,7 +31,26 @@ function ScrambleText({ text }) {
   return <span onMouseEnter={scramble}>{display}</span>;
 }
 
-export default function Hero() {
+function MusicPlayer({ playing, onToggle }) {
+  return (
+    <motion.button
+      className="music-player-btn"
+      onClick={onToggle}
+      whileTap={{ scale: 0.9 }}
+      aria-label={playing ? 'Pause music' : 'Play music'}
+      title={playing ? 'Pause lofi music' : 'Play lofi music'}
+    >
+      <div className={`sound-bars ${playing ? 'playing' : ''}`}>
+        <span className="sound-bar" />
+        <span className="sound-bar" />
+        <span className="sound-bar" />
+        <span className="sound-bar" />
+      </div>
+    </motion.button>
+  );
+}
+
+export default function Hero({ musicPlaying, toggleMusic }) {
   const heroRef = useRef(null);
   const [mouse, setMouse] = useState({ x: -999, y: -999 });
 
@@ -77,9 +96,14 @@ export default function Hero() {
         <motion.span variants={itemVariants} className="hero-availability">
           <span className="status-dot" /> Available for new opportunities
         </motion.span>
-        <motion.span variants={itemVariants} className="hero-location">
-          Based in Greater Noida, India
-        </motion.span>
+        <div className="hero-top-right">
+          <motion.span variants={itemVariants} className="hero-location">
+            Based in Greater Noida, India
+          </motion.span>
+          <motion.div variants={itemVariants}>
+            <MusicPlayer playing={musicPlaying} onToggle={toggleMusic} />
+          </motion.div>
+        </div>
       </div>
 
       <div className="hero-center">
