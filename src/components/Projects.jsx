@@ -12,26 +12,31 @@ function GithubIcon({ size = 20, color = 'currentColor' }) {
 import './Projects.css';
 
 const TABS = [
-  { id: 'products', label: 'Built Products' },
-  { id: 'shopify', label: 'Shopify Projects' },
+  { id: 'web', label: 'Web' },
+  { id: 'mobile', label: 'Mobile' },
+  { id: 'shopify', label: 'Shopify' },
 ];
 
-// Simple Icons CDN: https://cdn.simpleicons.org/{slug}
-const TECH_ICONS = {
-  react:       { label: 'React',       slug: 'react',       color: '#61DAFB' },
-  nextjs:      { label: 'Next.js',     slug: 'nextdotjs',   color: '#FFFFFF' },
-  typescript:  { label: 'TypeScript',  slug: 'typescript',  color: '#3178C6' },
-  tailwind:    { label: 'Tailwind',    slug: 'tailwindcss', color: '#06B6D4' },
-  openai:      { label: 'OpenAI',      slug: 'openai',      color: '#FFFFFF' },
-  vercel:      { label: 'Vercel',      slug: 'vercel',      color: '#FFFFFF' },
-  nodejs:      { label: 'Node.js',     slug: 'nodedotjs',   color: '#5FA04E' },
-  postgresql:  { label: 'PostgreSQL',  slug: 'postgresql',  color: '#4169E1' },
-  python:      { label: 'Python',      slug: 'python',      color: '#3776AB' },
-  shopify:     { label: 'Shopify',     slug: 'shopify',     color: '#96BF48' },
-  liquid:      { label: 'Liquid',      slug: 'shopify',     color: '#96BF48' },
-};
-
 const PROJECTS = {
+  web: [
+    {
+      title: "PawMatch",
+      category: "AI-Powered Pet Matching",
+      year: "2024",
+      image: "/pawmatch.jpeg",
+      link: "https://pawmatch-one.vercel.app/",
+      github: "https://github.com/Sawantkun/pawmatch",
+    },
+  ],
+  mobile: [
+    {
+      title: "MilestoneMoments",
+      category: "Child Milestone & Growth Tracker",
+      year: "2026",
+      image: "/milestone-moments.jpeg",
+      link: "https://milestonemoments-landing.vercel.app/",
+    },
+  ],
   shopify: [
     {
       title: "Moko's Cosmajix",
@@ -55,24 +60,13 @@ const PROJECTS = {
       link: "https://labgems.com/",
     },
   ],
-  products: [
-    {
-      title: "PawMatch",
-      category: "AI-Powered Pet Matching",
-      year: "2024",
-      image: "/pawmatch.jpeg",
-      link: "https://pawmatch-one.vercel.app/",
-      github: "https://github.com/Sawantkun/pawmatch",
-      techStack: ['react', 'nextjs', 'typescript', 'tailwind', 'openai', 'vercel'],
-    },
-  ],
 };
 
 export default function Projects() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-10%" });
 
-  const [activeTab, setActiveTab] = useState('products');
+  const [activeTab, setActiveTab] = useState('web');
   const [activeProject, setActiveProject] = useState(null);
 
   const x = useMotionValue(0);
@@ -140,7 +134,7 @@ export default function Projects() {
                     setActiveProject={setActiveProject}
                   />
                 ))}
-                {activeTab === 'products' && (
+                {(activeTab === 'web' || activeTab === 'mobile') && (
                   <motion.div
                     className="projects-coming-soon"
                     initial={{ opacity: 0, y: 10 }}
@@ -180,27 +174,6 @@ export default function Projects() {
   );
 }
 
-function TechStackIcons({ techStack }) {
-  if (!techStack || techStack.length === 0) return null;
-  return (
-    <div className="project-tech-stack">
-      {techStack.map((key) => {
-        const tech = TECH_ICONS[key];
-        if (!tech) return null;
-        return (
-          <div key={key} className="tech-icon-wrapper" title={tech.label}>
-            <img
-              src={`https://cdn.simpleicons.org/${tech.slug}/${tech.color.replace('#', '')}`}
-              alt={tech.label}
-              className="tech-icon"
-              loading="lazy"
-            />
-          </div>
-        );
-      })}
-    </div>
-  );
-}
 
 function ProjectItem({ project, index, isInView, setActiveProject }) {
   const [isHovered, setIsHovered] = useState(false);
@@ -223,7 +196,6 @@ function ProjectItem({ project, index, isInView, setActiveProject }) {
       <div className="project-info">
         <h3 className={`project-title ${isHovered ? 'hovered' : ''}`}>{project.title}</h3>
         <p className="project-category">{project.category}</p>
-        <TechStackIcons techStack={project.techStack} />
       </div>
 
       <div className="project-meta">
