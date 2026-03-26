@@ -34,7 +34,7 @@ const PROJECTS = {
       category: "Peer-to-Peer Skill Exchange Marketplace",
       year: "2026",
       image: "/timeloop.png",
-      link: "https://github.com/Sawantkun/timeloop",
+      link: "https://timeloop-landing.vercel.app/",
     },
     {
       title: "MilestoneMoments",
