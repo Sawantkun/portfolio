@@ -30,6 +30,13 @@ const PROJECTS = {
   ],
   mobile: [
     {
+      title: "TimeLoop",
+      category: "Peer-to-Peer Skill Exchange Marketplace",
+      year: "2026",
+      image: "/timeloop.png",
+      link: "https://github.com/Sawantkun/timeloop",
+    },
+    {
       title: "MilestoneMoments",
       category: "Child Milestone & Growth Tracker",
       year: "2026",
