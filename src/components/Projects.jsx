@@ -43,6 +43,13 @@ const PROJECTS = {
       image: "/milestone-moments.jpeg",
       link: "https://milestonemoments-landing.vercel.app/",
     },
+    {
+      title: "ShareSquare",
+      category: "Community Resource Sharing Platform",
+      year: "2026",
+      image: "/sharesquare.png",
+      link: "https://sharesquare-landing.vercel.app/",
+    },
   ],
   shopify: [
     {
