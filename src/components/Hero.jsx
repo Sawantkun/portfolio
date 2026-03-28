@@ -121,9 +121,9 @@ export default function Hero({ musicPlaying, toggleMusic }) {
 
       <div className="hero-bottom-bar">
         <motion.p variants={itemVariants} className="hero-description">
-          Full Stack Web developer crafting immersive, user-centric experiences
-          with React.js, Next.js, and Tailwind — turning design concepts into
-          responsive products that drive results.
+          Product developer building web, mobile, and Shopify experiences —
+          from AI-powered platforms to Flutter apps and e-commerce storefronts
+          that ship, scale, and drive real results.
         </motion.p>
 
         <motion.div variants={itemVariants} className="hero-stats">

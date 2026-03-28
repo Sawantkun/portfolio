@@ -17,7 +17,7 @@ const PRESET_QA = [
   },
   {
     q: "What's your tech stack?",
-    a: "Frontend: React, Next.js, Tailwind CSS, MUI, ChakraUI. Backend: Node.js, Python, Rust, Go. Databases: MySQL, MongoDB, Firebase. Tools: Git, GitHub, Bitbucket.",
+    a: "Web: React, Next.js, Tailwind CSS, MUI, ChakraUI. Mobile: Flutter, Dart, Firebase. Shopify: Liquid, custom theme dev. Backend: Node.js, Python, Rust, Go. Databases: MySQL, MongoDB, Firebase.",
   },
   {
     q: "Are you available for hire?",
@@ -46,7 +46,7 @@ const mkUser    = text               => ({ id: ++_id, sender: 'user', text, ts: 
 const mkConnect = ()                 => ({ id: ++_id, sender: 'bot',  text: CONNECT_REPLY.text, email: CONNECT_REPLY.email, ts: new Date() });
 
 const GREETING_MSG =
-  "Hey there 👋 I'm Sawant's portfolio assistant. Say hi or pick a question below to get started!";
+  "Hey there 👋 I'm Sawant's portfolio assistant. He builds web apps, Flutter mobile apps, and Shopify storefronts. Say hi or pick a question below!";
 
 const fmtTime = d => d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 

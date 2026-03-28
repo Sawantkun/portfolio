@@ -30,10 +30,10 @@ export default function About() {
           className="about-narrative"
           style={{ opacity, y: yOffset }}
         >
-          I am a Full Stack developer who believes great software is both
-          functionally robust and <span className="highlight-text">visually compelling</span>.
-          I build responsive, user-centric web experiences — from AI-powered
-          platforms to enterprise solutions — that drive real business results.
+          I build <span className="highlight-text">products</span> — web apps,
+          Flutter mobile apps, and Shopify storefronts. From AI-powered platforms
+          to e-commerce experiences, I care about shipping things that are fast,
+          beautiful, and built to last.
         </motion.div>
       </div>
 

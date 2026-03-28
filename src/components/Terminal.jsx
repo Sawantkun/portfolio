@@ -7,7 +7,7 @@ import './Terminal.css';
 // ── Portfolio data ────────────────────────────────────────────────────────────
 const DATA = {
   owner: 'Sawant Kumar',
-  role: 'Full Stack & Mobile Developer',
+  role: 'Product Developer',
   email: 'sawantkumar199@gmail.com',
   github: 'github.com/Sawantkun',
   portfolio: 'sawant-portfolio.vercel.app',
