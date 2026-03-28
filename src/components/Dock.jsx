@@ -16,10 +16,10 @@ const T_DATA = {
   github: 'github.com/Sawantkun',
   linkedin: 'linkedin.com/in/sawant-kumar-367638235',
   skills: {
-    Frontend:  ['React', 'Next.js', 'Tailwind CSS', 'MUI', 'ChakraUI'],
-    Backend:   ['Node.js', 'Python', 'Rust', 'Go'],
-    Database:  ['MySQL', 'MongoDB', 'Firebase'],
-    Tools:     ['Git', 'GitHub', 'Bitbucket'],
+    Mobile:   ['Flutter', 'Dart', 'Firebase', 'Provider', 'GoRouter'],
+    Frontend: ['React', 'Next.js', 'Tailwind CSS', 'Framer Motion', 'MUI', 'ChakraUI'],
+    Backend:  ['Node.js', 'Python', 'Flask', 'MongoDB', 'MySQL', 'WebSockets'],
+    DevOps:   ['GitHub', 'Vercel', 'Bitbucket', 'Google Gemini AI', 'REST APIs'],
   },
 };
 
@@ -549,9 +549,9 @@ function ResumeApp() {
       <div className="resume-section">
         <h2 className="resume-section-title">Summary</h2>
         <p className="resume-text">
-          Results-driven Full Stack Web developer adept at crafting immersive and user-centric web experiences.
-          Proficient in React.js, Next.js, and Tailwind, with a passion for translating design concepts into
-          responsive websites that drive business results.
+          Full Stack and Mobile Developer with experience building production-grade web and Flutter applications.
+          Proficient in React, Next.js, and Flutter with a strong focus on Firebase integration, responsive UI design,
+          and AI-powered features. Passionate about shipping polished, user-centric products across web and mobile platforms.
         </p>
       </div>
 
@@ -559,9 +559,10 @@ function ResumeApp() {
       <div className="resume-section">
         <h2 className="resume-section-title">Skills</h2>
         <div className="resume-skills">
-          <div className="resume-skill-row"><span className="resume-skill-cat">Frontend</span><span className="resume-text">ReactJs, NextJs, Tailwind, MUI, ChakraUI</span></div>
-          <div className="resume-skill-row"><span className="resume-skill-cat">Backend</span><span className="resume-text">MySQL, NodeJs, Python, Rust, Go</span></div>
-          <div className="resume-skill-row"><span className="resume-skill-cat">Tools</span><span className="resume-text">Github, Bitbucket, Firebase, MongoDB</span></div>
+          <div className="resume-skill-row"><span className="resume-skill-cat">Mobile</span><span className="resume-text">Flutter, Dart, Firebase (Auth, Firestore, Storage), Provider, GoRouter</span></div>
+          <div className="resume-skill-row"><span className="resume-skill-cat">Frontend</span><span className="resume-text">ReactJs, NextJs, Tailwind CSS, Framer Motion, MUI, ChakraUI</span></div>
+          <div className="resume-skill-row"><span className="resume-skill-cat">Backend</span><span className="resume-text">NodeJs, Python, Flask, Firebase, MongoDB, MySQL, WebSockets</span></div>
+          <div className="resume-skill-row"><span className="resume-skill-cat">DevOps</span><span className="resume-text">GitHub, Vercel, Bitbucket, Google Gemini AI, REST APIs</span></div>
           <div className="resume-skill-row"><span className="resume-skill-cat">Certifications</span><span className="resume-text">FreeCodeCamp Frontend Development</span></div>
         </div>
       </div>
@@ -593,6 +594,35 @@ function ResumeApp() {
             <ul className="resume-exp-points">
               {exp.points.map((p, i) => <li key={i}>{p}</li>)}
             </ul>
+          </div>
+        ))}
+      </div>
+
+      {/* Projects */}
+      <div className="resume-section">
+        <h2 className="resume-section-title">Projects</h2>
+
+        {[
+          { title: 'PawMatch – AI-Powered Pet Adoption Platform', year: '2025',
+            desc: 'Full-stack web app connecting adopters with shelter animals using AI-driven matching and real-time chat.',
+            stack: 'Next.js, TypeScript, Tailwind CSS, Firebase, Google Gemini AI, Framer Motion' },
+          { title: 'Milestone Moments – Child Development Tracker', year: '2025',
+            desc: 'Cross-platform Flutter app for tracking child milestones, growth charts, mood logs, and vaccination reminders.',
+            stack: 'Flutter, Firebase, Provider, fl_chart' },
+          { title: 'TimeLoop – SkillSwap Hub', year: '2025',
+            desc: 'Flutter mobile app for peer-to-peer skill exchange using a time-based credit economy.',
+            stack: 'Flutter, Firebase, Provider, GoRouter' },
+          { title: 'ShareSquare – Roommate Management App', year: '2024',
+            desc: 'Flutter app for coordinating shared living — chores, bills, and household communication.',
+            stack: 'Flutter, Firebase, Provider, GoRouter, fl_chart' },
+        ].map(proj => (
+          <div key={proj.title} className="resume-exp-item">
+            <div className="resume-exp-header">
+              <span className="resume-exp-role">{proj.title}</span>
+              <span className="resume-exp-duration">{proj.year}</span>
+            </div>
+            <span className="resume-exp-company">{proj.stack}</span>
+            <p className="resume-text" style={{ marginTop: '4px' }}>{proj.desc}</p>
           </div>
         ))}
       </div>
