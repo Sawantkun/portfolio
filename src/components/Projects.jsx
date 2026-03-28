@@ -18,62 +18,62 @@ const TABS = [
 ];
 
 const PROJECTS = {
-  web: [
+  "web": [
     {
-      title: "PawMatch",
-      category: "AI-Powered Pet Matching",
-      year: "2024",
-      image: "/pawmatch.jpeg",
-      link: "https://pawmatch-one.vercel.app/",
-      github: "https://github.com/Sawantkun/pawmatch",
-    },
+      "title": "PawMatch",
+      "category": "AI-Powered Pet Matching",
+      "year": "2024",
+      "image": "/pawmatch.jpeg",
+      "link": "https://pawmatch-one.vercel.app/",
+      "github": "https://github.com/Sawantkun/pawmatch"
+    }
   ],
-  mobile: [
+  "mobile": [
     {
-      title: "TimeLoop",
-      category: "Peer-to-Peer Skill Exchange Marketplace",
-      year: "2026",
-      image: "/timeloop.png",
-      link: "https://timeloop-landing.vercel.app/",
+      "title": "TimeLoop",
+      "category": "Peer-to-Peer Skill Exchange Marketplace",
+      "year": "2026",
+      "image": "/timeloop.png",
+      "link": "https://timeloop-landing.vercel.app/"
     },
     {
-      title: "MilestoneMoments",
-      category: "Child Milestone & Growth Tracker",
-      year: "2026",
-      image: "/milestone-moments.jpeg",
-      link: "https://milestonemoments-landing.vercel.app/",
+      "title": "MilestoneMoments",
+      "category": "Child Milestone & Growth Tracker",
+      "year": "2026",
+      "image": "/milestone-moments.jpeg",
+      "link": "https://milestonemoments-landing.vercel.app/"
     },
     {
-      title: "ShareSquare",
-      category: "Community Resource Sharing Platform",
-      year: "2026",
-      image: "/sharesquare.png",
-      link: "https://sharesquare-landing.vercel.app/",
-    },
+      "title": "ShareSquare",
+      "category": "Community Resource Sharing Platform",
+      "year": "2026",
+      "image": "/sharesquare.png",
+      "link": "https://sharesquare-landing.vercel.app/"
+    }
   ],
-  shopify: [
+  "shopify": [
     {
-      title: "Moko's Cosmajix",
-      category: "Beauty & Skincare",
-      year: "2024",
-      image: "/moko.jpeg",
-      link: "https://mokoscosmajix.com/",
+      "title": "Moko's Cosmajix",
+      "category": "Beauty & Skincare",
+      "year": "2024",
+      "image": "/moko.jpeg",
+      "link": "https://mokoscosmajix.com/"
     },
     {
-      title: "Dileti",
-      category: "Fine Jewellery & Lab-Grown Diamonds",
-      year: "2024",
-      image: "/dileti.jpeg",
-      link: "https://dileti.com/",
+      "title": "Dileti",
+      "category": "Fine Jewellery & Lab-Grown Diamonds",
+      "year": "2024",
+      "image": "/dileti.jpeg",
+      "link": "https://dileti.com/"
     },
     {
-      title: "LabGems",
-      category: "Lab-Grown Diamonds & Gemstones",
-      year: "2024",
-      image: "/labgems.jpeg",
-      link: "https://labgems.com/",
-    },
-  ],
+      "title": "LabGems",
+      "category": "Lab-Grown Diamonds & Gemstones",
+      "year": "2024",
+      "image": "/labgems.jpeg",
+      "link": "https://labgems.com/"
+    }
+  ]
 };
 
 export default function Projects() {

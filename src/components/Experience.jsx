@@ -4,46 +4,46 @@ import './Experience.css';
 
 const EXPERIENCES = [
   {
-    year: "Oct 2024 – Present",
-    role: "Associate Consultant",
-    company: "NusterAi · Remote",
-    description: "Creating innovative mobile and web applications using React.js, focusing on responsive design and optimal user experience. Collaborating with cross-functional teams to develop AI-powered solutions and consulting with clients to translate business requirements into scalable technical solutions.",
-    internship: false,
+    "year": "Oct 2024 – Present",
+    "role": "Associate Consultant",
+    "company": "NusterAi · Remote",
+    "description": "Creating innovative mobile and web applications using React.js, focusing on responsive design and optimal user experience. Collaborating with cross-functional teams to develop AI-powered solutions and consulting with clients to translate business requirements into scalable technical solutions.",
+    "internship": false
   },
   {
-    year: "Dec 2024 – Present",
-    role: "Software Developer Intern (Part-time)",
-    company: "Blackbytt Software Solutions · Remote",
-    description: "Contributing to web development projects in a hybrid environment. Building and maintaining software solutions aligned with business requirements, with exposure to real-world client projects.",
-    internship: false,
+    "year": "Dec 2024 – Present",
+    "role": "Software Developer Intern (Part-time)",
+    "company": "Blackbytt Software Solutions · Remote",
+    "description": "Contributing to web development projects in a hybrid environment. Building and maintaining software solutions aligned with business requirements, with exposure to real-world client projects.",
+    "internship": false
   },
   {
-    year: "Mar 2024 – Sep 2024",
-    role: "Project Engineer",
-    company: "Futuristic Bots · Haridwar",
-    description: "Developed automation solutions for forklifts, integrating autonomous capabilities for improved efficiency. Conducted performance tests and collaborated with the team to optimize forklift navigation and task execution.",
-    internship: false,
+    "year": "Mar 2024 – Sep 2024",
+    "role": "Project Engineer",
+    "company": "Futuristic Bots · Haridwar",
+    "description": "Developed automation solutions for forklifts, integrating autonomous capabilities for improved efficiency. Conducted performance tests and collaborated with the team to optimize forklift navigation and task execution.",
+    "internship": false
   },
   {
-    year: "Sep 2023 – Feb 2024",
-    role: "Web Development Experience",
-    company: "Invofy · Remote",
-    description: "Implemented dynamic web applications using Next.js with React components. Designed responsive UIs using Bootstrap, ensuring cross-device compatibility. Collaborated with a multidisciplinary team on code reviews and performance optimization.",
-    internship: true,
+    "year": "Sep 2023 – Feb 2024",
+    "role": "Web Development Experience",
+    "company": "Invofy · Remote",
+    "description": "Implemented dynamic web applications using Next.js with React components. Designed responsive UIs using Bootstrap, ensuring cross-device compatibility. Collaborated with a multidisciplinary team on code reviews and performance optimization.",
+    "internship": true
   },
   {
-    year: "Nov 2022 – Mar 2023",
-    role: "Web Development Experience",
-    company: "Frienducation · Remote",
-    description: "Developed responsive user interfaces and interactive components using ReactJS for educational platforms. Collaborated with team members to implement new features and optimize codebase performance.",
-    internship: true,
+    "year": "Nov 2022 – Mar 2023",
+    "role": "Web Development Experience",
+    "company": "Frienducation · Remote",
+    "description": "Developed responsive user interfaces and interactive components using ReactJS for educational platforms. Collaborated with team members to implement new features and optimize codebase performance.",
+    "internship": true
   },
   {
-    year: "Jul 2022 – Aug 2022",
-    role: "Web Development & Python Experience",
-    company: "Omnipresent RobotTech · Greater Noida",
-    description: "Developed responsive UIs for drone consoles and built a real-time web console for drone tracking with live location streaming and telemetry storage. Used Python with Flask and WebSockets for backend development.",
-    internship: true,
+    "year": "Jul 2022 – Aug 2022",
+    "role": "Web Development & Python Experience",
+    "company": "Omnipresent RobotTech · Greater Noida",
+    "description": "Developed responsive UIs for drone consoles and built a real-time web console for drone tracking with live location streaming and telemetry storage. Used Python with Flask and WebSockets for backend development.",
+    "internship": true
   }
 ];
 
