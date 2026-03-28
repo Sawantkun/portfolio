@@ -109,7 +109,7 @@ export default function Hero({ musicPlaying, toggleMusic }) {
       <div className="hero-center">
         <div className="title-overflow">
           <motion.h1 variants={itemVariants} className="hero-main-title">
-            <ScrambleText text="Creative" />
+            <ScrambleText text="Product" />
           </motion.h1>
         </div>
         <div className="title-overflow align-right">
