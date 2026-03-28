@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Terminal as TerminalIcon, Bird, Skull, X, FileText, Download } from 'lucide-react';
+import { PROJECTS } from './Projects';
 import './Dock.css';
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -68,11 +69,21 @@ const T_COMMANDS = {
     L('  Jul 2022 – Aug 2022', 'accent'), L('  Web Dev & Python Experience', 'body'), L('  Omnipresent RobotTech  ·  Greater Noida', 'muted'),
     L('    └─ Drone console UI, Flask + WebSockets telemetry', 'dim'),
   ],
-  projects: () => [
-    L('PROJECTS', 'heading'), HR(), BL(),
-    L('  New projects coming soon...', 'accent'), BL(),
-    L('  Scroll up to the projects section to see the latest work.', 'muted'),
-  ],
+  projects: () => {
+    const lines = [L('PROJECTS', 'heading'), HR()];
+    let num = 1;
+    Object.entries(PROJECTS).forEach(([tab, items]) => {
+      if (!items.length) return;
+      lines.push(BL());
+      lines.push(L(`  ${tab.toUpperCase()}`, 'dim'));
+      items.forEach(({ title, category, year }) => {
+        lines.push(BL());
+        lines.push(L(`  ${String(num++).padStart(2, '0')}  ${title}`, 'accent'));
+        lines.push(L(`      ${category} — ${year}`, 'muted'));
+      });
+    });
+    return lines;
+  },
   contact: () => [
     L('GET IN TOUCH', 'heading'), HR(), BL(),
     L(`  Email     ${T_DATA.email}`, 'body'),

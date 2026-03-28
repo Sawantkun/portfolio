@@ -17,7 +17,7 @@ const TABS = [
   { id: 'shopify', label: 'Shopify' },
 ];
 
-const PROJECTS = {
+export const PROJECTS = {
   "web": [
     {
       "title": "PawMatch",

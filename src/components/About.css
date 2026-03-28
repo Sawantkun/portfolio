@@ -38,10 +38,18 @@
   background: var(--bg-color);
 }
 
+.marquee-strips {
+  display: flex;
+  flex-direction: column;
+}
+
+.marquee-container--reverse {
+  border-top: none;
+}
+
 .marquee-content {
   display: flex;
   white-space: nowrap;
-  animation: marquee 30s linear infinite;
 }
 
 .marquee-item {
@@ -53,10 +61,6 @@
   letter-spacing: 0.05em;
 }
 
-@keyframes marquee {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-33.33%); }
-}
 
 @media (max-width: 768px) {
   .about-vibe-section {

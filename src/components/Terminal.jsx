@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Terminal as TerminalIcon, X } from 'lucide-react';
+import { PROJECTS } from './Projects';
 import './Terminal.css';
 
 // ── Portfolio data ────────────────────────────────────────────────────────────
@@ -68,12 +69,6 @@ const DATA = {
       ],
     },
   ],
-  projects: [
-    { num: '01', title: 'PawMatch',          category: 'Next.js · Firebase · Gemini AI', year: '2025' },
-    { num: '02', title: 'Milestone Moments', category: 'Flutter · Firebase · fl_chart',  year: '2025' },
-    { num: '03', title: 'TimeLoop',          category: 'Flutter · Firebase · GoRouter',  year: '2025' },
-    { num: '04', title: 'ShareSquare',       category: 'Flutter · Firebase · Provider',  year: '2024' },
-  ],
 };
 
 // ── Output helpers ────────────────────────────────────────────────────────────
@@ -135,10 +130,16 @@ const COMMANDS = {
 
   projects: () => {
     const lines = [L('PROJECTS', 'heading'), HR()];
-    DATA.projects.forEach(({ num, title, category, year }) => {
+    let num = 1;
+    Object.entries(PROJECTS).forEach(([tab, items]) => {
+      if (!items.length) return;
       lines.push(BL());
-      lines.push(L(`  ${num}  ${title}`, 'accent'));
-      lines.push(L(`      ${category} — ${year}`, 'muted'));
+      lines.push(L(`  ${tab.toUpperCase()}`, 'dim'));
+      items.forEach(({ title, category, year }) => {
+        lines.push(BL());
+        lines.push(L(`  ${String(num++).padStart(2,'0')}  ${title}`, 'accent'));
+        lines.push(L(`      ${category} — ${year}`, 'muted'));
+      });
     });
     return lines;
   },
