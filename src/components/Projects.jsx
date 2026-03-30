@@ -26,6 +26,14 @@ export const PROJECTS = {
       "image": "/pawmatch.jpeg",
       "link": "https://pawmatch-one.vercel.app/",
       "github": "https://github.com/Sawantkun/pawmatch"
+    },
+    {
+      "title": "Meridian",
+      "category": "Autonomous Research Intelligence Engine",
+      "year": "2026",
+      "image": "/meridian.jpeg",
+      "link": "https://drive.google.com/file/d/1Umhv3VZR2kzpAzF3yG23jSevWDJkz2CE/view?usp=sharing",
+      "github": "https://github.com/Sawantkun/meridian.git"
     }
   ],
   "mobile": [
